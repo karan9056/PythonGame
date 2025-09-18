@@ -60,7 +60,31 @@ class TestBowlingGame(unittest.TestCase):
         print(" correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
 
         self.assertEqual(actualScore, expectedScore)
-   
+    
+   def test_strike_followed_by_normal_frame(self):
+        """
+        Test the specific scenario from business rules:
+        Frame 1: Strike (10)
+        Frame 2: 3 pins + 6 pins
+        Expected total: 28
+        """
+        print("\n unit test <=> Strike followed by normal frame Business Rules Example")
+        
+        # Frame 1: Strike, Frame 2: 3 + 6, then zeros for remaining frames
+        Rolls = [10, 3, 6] + [0] * 16
+        ExpectedScore = 28  # 10 + (3+6) = 19 for frame1 + (3+6) = 9 for frame2 = 28
+        
+        for pins in Rolls:
+            self.game.roll(pins)
+        
+        ActualScore = self.game.score()
+        
+        print(f" rolls: {Rolls}")
+        print(f" expected score: {ExpectedScore}")
+        print(f" actual score: {ActualScore}")
+        print(" correct implementation:", "✓" if ActualScore == ExpectedScore else "✗")
+        
+        self.assertEqual(ActualScore, ExpectedScore)
 
 if __name__ == '__main__':
     unittest.main()
