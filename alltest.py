@@ -85,6 +85,23 @@ class TestBowlingGame(unittest.TestCase):
         print(" correct implementation:", "✓" if ActualScore == ExpectedScore else "✗")
         
         self.assertEqual(ActualScore, ExpectedScore)
+    def test_all_ones(self):
+        #where all rolls knock down exactly one pins
+        print("\n Test case where All strike ones")
+        rolls = [1] * 20
+        expectedScore = 20
+
+        for pins in rolls:
+            self.game.roll(pins)
+
+        actualScore = self.game.score()
+
+        print(f"rolls <=> {rolls}")
+        print(f"expected score <=> {expectedScore}")
+        print(f"actual score <=> {actualScore}")
+        print("correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
+        self.assertEqual(actualScore, expectedScore)
+       
 
 if __name__ == '__main__':
     unittest.main()
