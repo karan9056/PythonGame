@@ -135,6 +135,23 @@ class TestBowlingGame(unittest.TestCase):
         print(" correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
 
         self.assertEqual(actualScore, expectedScore)
+    def test_perfect_game(self):
+        #test perfect game where score 300
+        print("\n unit test  <=> Perfect Game")
+        rolls = [10] * 12
+        expectedScore = 300  
+        
+        for pins in rolls:
+            self.game.roll(pins)
+        
+        actualScore = self.game.score()
+        
+        print(f" rolls <=> {rolls}")
+        print(f" expected score <=> {expectedScore}")
+        print(f" actual score <=> {actualScore}")
+        print(" correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
+
+        self.assertEqual(actualScore, expectedScore)
        
 
 if __name__ == '__main__':
