@@ -27,6 +27,22 @@ class TestBowlingGame(unittest.TestCase):
         print("correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
 
         self.assertEqual(actualScore, expectedScore)
+    def test_one_strike(self):
+        """where one strike followed by normal rolls"""
+        print("\n unit test <=> One Strike")
+        rolls = [10, 3, 4] + [0] * 16
+        expectedScore = 24  
+        # frame 1 contain strike 10 and 2nd frame rolls 3 and 4 and remaining rolls zeros
+        for pins in rolls:
+            self.game.roll(pins)
+
+        actualScore = self.game.score()
+
+        print(f" rolls <=> {rolls}")
+        print(f" expected score <=> {expectedScore}")
+        print(f" actual score <=> {actualScore}")
+        print(" correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
+        self.assertEqual(actualScore, expectedScore)
 
 
 if __name__ == '__main__':
