@@ -118,6 +118,23 @@ class TestBowlingGame(unittest.TestCase):
         print(" correct implementation <=>", "✓" if actualScore == expectedScore else "✗")
 
         self.assertEqual(actualScore, expectedScore)
+    def test_strike_in_last_frame(self):
+        #Strike in Last Frame
+        print("unit test <=> Strike in Last Frame")
+        rolls = [0] * 18 + [10, 3, 4]
+        expectedScore = 17 
+        
+        for pins in rolls:
+            self.game.roll(pins)
+
+        actualScore = self.game.score()
+        
+        print(f" rolls <=> {rolls}")
+        print(f" expected score <=> {expectedScore}")
+        print(f" actual score <=> {actualScore}")
+        print(" correct implementation <=> ", "✓" if actualScore == expectedScore else "✗")
+
+        self.assertEqual(actualScore, expectedScore)
        
 
 if __name__ == '__main__':
