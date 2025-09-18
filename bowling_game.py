@@ -10,10 +10,15 @@ class BowlingGame:
         self.rolls = []
     
     def roll(self, pins):
-        self.rolls.append(pins)
-    """this function record the number of pins knocked down in a roll of game
+        """this function record the number of pins knocked down in a roll of game
     Parameters:
     pins (int): it append or add the number of pins knocked down in the roll of game from 0 to 10"""
+        if not isinstance(pins, int):
+            raise ValueError("Pins must be an integer.")
+        if pins < 0 or pins > 10:
+            raise ValueError(f"Invalid number of pins: {pins}. Pins must be between 0 and 10.")
+        self.rolls.append(pins)
+    
     def score(self):
         """Score method calculate and return the score value according to pins knocked 
         Returns: 
@@ -41,12 +46,13 @@ class BowlingGame:
         return totalScore
     
     def isStrike(self, frameIndex):
-        return frameIndex < len(self.rolls) and self.rolls[frameIndex] == 10
         """Strike value calculation by above method
         Parameters: 
         frameIndex (int) : check index value in the rolls list
         Returns:
         Boolean: if roll strike 10 pins it returns true and else false"""
+        return frameIndex < len(self.rolls) and self.rolls[frameIndex] == 10
+        
     def isSpare(self, frameIndex):
         """Spare method check two rolls starting value from spare index
         Parameters:
@@ -57,24 +63,28 @@ class BowlingGame:
                 self.rolls[frameIndex] + self.rolls[frameIndex + 1] == 10)
     
     def strikeBonus(self, frameIndex):
-        return self.rolls[frameIndex + 1] + self.rolls[frameIndex + 2]
-    """strike bonus method calculate the strike bonus points according to strike
+        """strike bonus method calculate the strike bonus points according to strike
     parameters:
     Strike roll index value
     Returns:
     frameIndex (int) : it return the sum of two rolls after the strike pins knocked down"""
+      
+        return self.rolls[frameIndex + 1] + self.rolls[frameIndex + 2]
+  
     def spareBonus(self, frameIndex):
-        return self.rolls[frameIndex + 2]
-    """Last spare bonus method calculate spare bonus points
+        """Last spare bonus method calculate spare bonus points
     Parameters:
     frameIndex (int): index of the first roll in the spare
     returns:
     Number of pins knocked down in the next roll after the spare"""
-    def sumOfBallsInFrame(self, frameIndex):
+        return self.rolls[frameIndex + 2]
     
-        return self.rolls[frameIndex] + self.rolls[frameIndex + 1]
-    """Sum of two rolls in a frame with no strike or spare
+    def sumOfBallsInFrame(self, frameIndex):
+        """Sum of two rolls in a frame with no strike or spare
     Parameters:
     frameIndex (int): index of first roll in the frame of game
     Returns:
     sum of two consecutive rolls"""
+    
+        return self.rolls[frameIndex] + self.rolls[frameIndex + 1]
+    
